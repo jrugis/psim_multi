@@ -16,9 +16,10 @@ start = time.time()
 cell_names = ["a1c1", "a1c2", "a1c3", "a1c4"] 
 cells = []
 cell_pipes = []
-for name in cell_names:
+cell_cell_pipes = [Pipe()]
+for i, name in enumerate(cell_names):
     cell_pipes.append(Pipe())
-    cells.append(Process(target = cell.cell_class, args = (name, cell_pipes[-1][B])))
+    cells.append(Process(target = cell.cell_class, args = (name, i, cell_pipes[-1][B], cell_cell_pipes[0][T], cell_cell_pipes[0][B])))
 
 # simulation time stepping
 for step in range(3):  
