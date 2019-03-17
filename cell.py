@@ -17,7 +17,7 @@ class cell_class:
     def solve(self, delta_t):
         if self.number == 0: self.B.send(self.name)
         if self.number == 1: self.T.send(self.name)        
-        x = np.arange(start=0.1, stop=100000.0, step=0.1, dtype="double")
+        x = np.arange(start=0.1, stop=100000.0, step=0.01, dtype="double")
         k = np.log(x)
         l = np.sin(x)
         m = np.cos(x)
