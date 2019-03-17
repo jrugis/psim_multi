@@ -27,7 +27,7 @@ for step in range(3):
     if step == 0:  # only once per cell
         for c in cells: c.start()
     for p in cell_pipes:
-        print("a1", step, "result", p[T].recv())  # receive result message from cell 
+        print("<sim>", step, "result", p[T].recv())  # receive result message from cell 
 
 # send "done" message to cell processes
 for p in cell_pipes: p[T].send(0)     

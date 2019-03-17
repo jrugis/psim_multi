@@ -2,8 +2,7 @@
 # cell class definition
 #
 
-import math as m
-import scipy as sc
+import numpy as np
 
 class cell_class:
     def __init__(self, name, number, conn_a, conn_T, conn_B):
@@ -18,21 +17,21 @@ class cell_class:
     def solve(self, delta_t):
         if self.number == 0: self.B.send(self.name)
         if self.number == 1: self.T.send(self.name)        
-        for i in range(10000000):
-            k = m.log(i+1)
-            l = m.sin(i)
-            l = m.cos(i)
+        x = np.arange(start=0.1, stop=100000.0, step=0.1, dtype="double")
+        k = np.log(x)
+        l = np.sin(x)
+        m = np.cos(x)
         self.a.send([self.name, 1.0])
-        if self.number == 0: print(self.name, self.B.recv())
-        if self.number == 1: print(self.name, self.T.recv())
+        if self.number == 0: print("<cell>", self.name, self.B.recv())
+        if self.number == 1: print("<cell>", self.name, self.T.recv())
         
     def run(self):  # simulation run loop
         step = 0
         while(True):
-            print(self.name, "step", step)
             delta_t = self.a.recv()
             if delta_t == 0:
                 break
+            print("<cell>", self.name, "step", step)
             self.solve(delta_t)
             step += 1
     
